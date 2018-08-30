@@ -36,8 +36,9 @@ def replace_in_position_strategy():
     directory = json_properties["path"]
     position = json_properties["rename_strategy"]["position"]
     name_to_add = json_properties["new_name"]
+    characters_to_replace = json_properties["rename_strategy"]["characters_to_replace"]
     for f in os.listdir(directory):
-        filename = f[:position] + name_to_add + f[position + 1:]
+        filename = f[:position] + name_to_add + f[position + characters_to_replace:]
         os.rename(os.path.join(directory, f), os.path.join(directory, filename))
 
 

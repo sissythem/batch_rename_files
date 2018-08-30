@@ -2,7 +2,8 @@
   "path": "C:/Users/sthemeli/Desktop/test/",
   "rename_strategy": {
     "strategy": "replace_in_position",
-    "position": 2
+    "position": 2,
+    "characters_to_replace": 2
   },
   "new_name": "SAY.TariffName_"
 }
