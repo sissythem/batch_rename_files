@@ -1,7 +1,7 @@
 import os
 import utils
 
-strategies = ["prefix", "suffix", "infix", "replace_all", "replace_in_position"]
+strategies = ["prefix", "suffix", "infix", "replace"]
 
 
 def prefix_rename_strategy(directory, name_to_add):
@@ -32,11 +32,14 @@ def replace_all_rename_strategy(directory, new_name):
      for i, f in enumerate(os.listdir(directory))]
 
 
-def replace_in_position_strategy():
+def replace_rename_strategy():
     directory = json_properties["path"]
     position = json_properties["rename_strategy"]["position"]
     name_to_add = json_properties["new_name"]
     characters_to_replace = json_properties["rename_strategy"]["characters_to_replace"]
+    if characters_to_replace == -1:
+        replace_all_rename_strategy(directory, name_to_add)
+        return
     for f in os.listdir(directory):
         filename = f[:position] + name_to_add + f[position + characters_to_replace:]
         os.rename(os.path.join(directory, f), os.path.join(directory, filename))
@@ -52,6 +55,4 @@ if __name__ == '__main__':
     elif rename_strategy == strategies[2]:
         infix_rename_strategy()
     elif rename_strategy == strategies[3]:
-        replace_all_rename_strategy(json_properties["path"], json_properties["new_name"])
-    elif rename_strategy == strategies[4]:
-        replace_in_position_strategy()
+        replace_rename_strategy()
