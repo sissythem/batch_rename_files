@@ -3,7 +3,7 @@
   "rename_strategy": {
     "strategy": "replace",
     "position": 2,
-    "characters_to_replace": -1
+    "characters_to_replace": 2
   },
   "new_name": "SAY.TariffName_"
 }
