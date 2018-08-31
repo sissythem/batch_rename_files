@@ -1,4 +1,5 @@
 {
+  "type": "file",
   "path": "C:/Users/sthemeli/Desktop/test/",
   "rename_strategy": {
     "strategy": "replace",

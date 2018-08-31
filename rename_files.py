@@ -1,8 +1,6 @@
 import os
 import utils
 
-strategies = ["prefix", "suffix", "infix", "replace"]
-
 
 def prefix_rename_strategy(directory, name_to_add):
     """
@@ -28,14 +26,11 @@ def suffix_rename_strategy(directory, name_to_add):
             os.rename(os.path.join(directory, f), os.path.join(directory, str(old_name) + name_to_add + str(suffix)))
 
 
-def infix_rename_strategy():
+def infix_rename_strategy(directory, position, name_to_add):
     """
     Add some characters inside the filename
     :return:
     """
-    directory = json_properties["path"]
-    position = json_properties["rename_strategy"]["position"]
-    name_to_add = json_properties["new_name"]
     for f in os.listdir(directory):
         if os.path.isfile(os.path.join(directory, f)):
             suffix, name_parts = utils.split_filename_suffix(f)
@@ -59,7 +54,7 @@ def replace_all_rename_strategy(directory, new_name):
                       os.path.join(directory, new_name + str(count) + utils.split_filename_suffix(f)[0]))
 
 
-def replace_rename_strategy():
+def replace_rename_strategy(directory, position, name_to_add, characters_to_replace):
     """
     Replace some (or all the) characters of a filename with the specified ones.
     Check if the whole name should be replaces - in this case the replace_all_rename_strategy will be used -
@@ -67,10 +62,6 @@ def replace_rename_strategy():
     are added and at the end of the name the file type is also added
     :return:
     """
-    directory = json_properties["path"]
-    position = json_properties["rename_strategy"]["position"]
-    name_to_add = json_properties["new_name"]
-    characters_to_replace = json_properties["rename_strategy"]["characters_to_replace"]
     if characters_to_replace == -1:
         replace_all_rename_strategy(directory, name_to_add)
         return
@@ -80,16 +71,3 @@ def replace_rename_strategy():
             old_name = "".join(name_parts)
             filename = old_name[:position] + name_to_add + old_name[position + characters_to_replace:] + suffix
             os.rename(os.path.join(directory, f), os.path.join(directory, filename))
-
-
-if __name__ == '__main__':
-    json_properties = utils.read_configurations("properties.json")
-    rename_strategy = json_properties["rename_strategy"]["strategy"]
-    if rename_strategy == strategies[0]:
-        prefix_rename_strategy(json_properties["path"], json_properties["new_name"])
-    elif rename_strategy == strategies[1]:
-        suffix_rename_strategy(json_properties["path"], json_properties["new_name"])
-    elif rename_strategy == strategies[2]:
-        infix_rename_strategy()
-    elif rename_strategy == strategies[3]:
-        replace_rename_strategy()

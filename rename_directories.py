@@ -24,14 +24,11 @@ def suffix_rename_strategy(directory, name_to_add):
      os.listdir(directory) if os.path.isdir(os.path.join(directory, f))]
 
 
-def infix_rename_strategy():
+def infix_rename_strategy(directory, position, name_to_add):
     """
     Add some characters inside the directory name
     :return:
     """
-    directory = json_properties["path"]
-    position = json_properties["rename_strategy"]["position"]
-    name_to_add = json_properties["new_name"]
     for f in os.listdir(directory):
         if os.path.isdir(os.path.join(directory, f)):
             first_part, second_part = utils.split_filename_in_position(position, list(f))
@@ -53,7 +50,7 @@ def replace_all_rename_strategy(directory, new_name):
             os.rename(os.path.join(directory, f), os.path.join(directory, new_name + str(count)))
 
 
-def replace_rename_strategy():
+def replace_rename_strategy(directory, position, name_to_add, characters_to_replace):
     """
     Replace some (or all the) characters of a directory name with the specified ones.
     Check if the whole name should be replaced - in this case the replace_all_rename_strategy will be used -
@@ -61,10 +58,6 @@ def replace_rename_strategy():
     with the new name
     :return:
     """
-    directory = json_properties["path"]
-    position = json_properties["rename_strategy"]["position"]
-    name_to_add = json_properties["new_name"]
-    characters_to_replace = json_properties["rename_strategy"]["characters_to_replace"]
     if characters_to_replace == -1:
         replace_all_rename_strategy(directory, name_to_add)
         return
