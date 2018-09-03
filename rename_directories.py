@@ -65,16 +65,3 @@ def replace_rename_strategy(directory, position, name_to_add, characters_to_repl
         if os.path.isdir(os.path.join(directory, f)):
             filename = f[:position] + name_to_add + f[position + characters_to_replace:]
             os.rename(os.path.join(directory, f), os.path.join(directory, filename))
-
-
-if __name__ == '__main__':
-    json_properties = utils.read_configurations("properties.json")
-    rename_strategy = json_properties["rename_strategy"]["strategy"]
-    if rename_strategy == strategies[0]:
-        prefix_rename_strategy(json_properties["path"], json_properties["new_name"])
-    elif rename_strategy == strategies[1]:
-        suffix_rename_strategy(json_properties["path"], json_properties["new_name"])
-    elif rename_strategy == strategies[2]:
-        infix_rename_strategy()
-    elif rename_strategy == strategies[3]:
-        replace_rename_strategy()
