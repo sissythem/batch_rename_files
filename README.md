@@ -12,3 +12,15 @@ The supported strategies are:
 ## Rename directories
 
 To rename the immediate sub-directories of a directory, use the rename_directories.py. The renaming strategies are similar as above with the difference that the file type is not needed here. In order to select the renaming strategy use the json file as above.
+
+## properties.json file
+
+### Possible values for properties
+
+* type: file, directory
+* path: the path to the root directory
+* rename_strategy
+  * strategy: prefix, suffix, infix, replace
+  * position: used only for infix and replace strategies. The starting position where the new name will be added or will replace some characters
+  * characters_to_replace: the number of characters to be replaced starting from position. This value is used only in replace strategy. If it is set to -1 the whole name will be replaced with the new name (only the type of the file will remain as is)
+* new_name: the name to be added in the file name (or to replace the old file name)
