@@ -2,9 +2,9 @@
   "type": "file",
   "path": "C:/Users/sthemeli/Desktop/test/",
   "rename_strategy": {
-    "strategy": "replace",
+    "strategy": "prefix",
     "position": 2,
     "characters_to_replace": 2
   },
-  "new_name": "SAY.TariffName_"
+  "new_name": "-"
 }
