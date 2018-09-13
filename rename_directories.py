@@ -1,8 +1,6 @@
 import os
 import utils
 
-strategies = ["prefix", "suffix", "infix", "replace"]
-
 
 def prefix_rename_strategy(directory, name_to_add):
     """
